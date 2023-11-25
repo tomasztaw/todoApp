@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tutorial</title>
+    <link rel="stylesheet" href="./css/style.css">
+<!--    <script src="jquery-2.1.4.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="home-container">
+
+<div class="loader-wrapper">
+    <div class="wave">
+        <div class="rect rect-1"></div>
+        <div class="rect rect-2"></div>
+        <div class="rect rect-3"></div>
+        <div class="rect rect-4"></div>
+        <div class="rect rect-5"></div>
+    </div>
+</div>
+
+    <h1>Aplikacja Spring Boot</h1>
+    <h2>Generowanie opisu: </h2>
+    <h4>/api/v1/basic/{word}</h4>
+    <p>Zamień word na słowo, dla jakiego ma być opis</p>
+
+    <p>Lub</p>
+    <p>/fullDesc?word={słowo}</p>
+
+    <a href="https://wordgenerator-production.up.railway.app/swagger-ui.html" title="swagger" target="_blank">
+        Swagger
+    </a>
+    <a href="https://wordgenerator-production.up.railway.app/actuator" title="actuator" target="_blank">
+        Actuator
+    </a>
+
+</div>
+
+<script>
+    $(window).on("load", function() {
+        $(".loader-wrapper").fadeOut("slow");
+    });
+    $(window).on("beforeunload", function() {
+        $(".loader-wrapper").fadeIn("slow");
+    });
+
+</script>
+
+</body>
+</html>
