@@ -3,6 +3,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/todo_app
     username: postgres
     password: postgres
+
+    data: classpath:data.sql
+
   jpa:
     hibernate:
       ddl-auto: update
