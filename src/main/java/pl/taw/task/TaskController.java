@@ -29,16 +29,29 @@ public class TaskController {
         return "tasks";
     }
 
-    @GetMapping("/tasks/{id}")
+    @GetMapping("/{taskId}")
     public String showTaskById(@PathVariable("taskId") Integer id, Model model) {
         Task task = taskService.getTaskById(id);
         model.addAttribute("task", task);
 
         return "taskDetails";
     }
+//
+//    @PostMapping
+//    public Task addTask(@RequestBody Task task) {
+//        return taskService.saveTask(task);
+//    }
+
+    @GetMapping("/new")
+    public String showAddTaskForm(Model model) {
+        model.addAttribute("newTask", new Task());
+        return "add-task";
+    }
 
     @PostMapping
-    public Task addTask(@RequestBody Task task) {
-        return taskService.saveTask(task);
+    public String addTask(@ModelAttribute("newTask") Task newTask) {
+        // ...
+
+        return "redirect:/tasks";
     }
 }

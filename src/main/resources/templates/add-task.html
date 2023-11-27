@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dodaj Zadanie</title>
+</head>
+<body>
+
+<h2>Dodaj Zadanie</h2>
+
+<form th:action="@{/tasks}" method="post" th:object="${newTask}">
+    <label for="taskType">Typ:</label>
+    <input type="text" id="taskType" name="taskType" th:field="*{taskType}" required><br>
+
+    <label for="taskTitle">Tytuł:</label>
+    <input type="text" id="taskTitle" name="taskTitle" th:field="*{taskTitle}" required><br>
+
+    <label for="taskContent">Treść:</label>
+    <textarea id="taskContent" name="taskContent" th:field="*{taskContent}" required></textarea><br>
+
+    <label for="completed">Zakończone:</label>
+    <input type="checkbox" id="completed" name="completed" th:field="*{completed}"><br>
+
+    <button type="submit">Dodaj Zadanie</button>
+</form>
+
+</body>
+</html>
