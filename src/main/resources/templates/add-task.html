@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodaj Zadanie</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
 <body>
 
@@ -19,6 +22,8 @@
 
     <label for="completed">Zakończone:</label>
     <input type="checkbox" id="completed" name="completed" th:field="*{completed}"><br>
+
+<!--    <input type="hidden" id="creationDate" name="creationDate" th:value="${#dates.format(#dates.now(), 'yyyy-MM-dd')}">-->
 
     <button type="submit">Dodaj Zadanie</button>
 </form>

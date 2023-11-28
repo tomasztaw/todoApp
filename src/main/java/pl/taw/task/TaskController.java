@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -44,13 +45,22 @@ public class TaskController {
 
     @GetMapping("/new")
     public String showAddTaskForm(Model model) {
-        model.addAttribute("newTask", new Task());
+        Task newTask = new Task();
+        newTask.setCreatedTime(LocalDateTime.now());
+        model.addAttribute("newTask", newTask);
         return "add-task";
     }
 
     @PostMapping
     public String addTask(@ModelAttribute("newTask") Task newTask) {
-        // ...
+        Task taskForSave = Task.builder()
+                .taskId(newTask.getTaskId())
+                .taskType(newTask.getTaskType())
+                .taskTitle(newTask.getTaskTitle())
+                .taskContent(newTask.getTaskContent())
+                .createdTime(LocalDateTime.now())
+                .build();
+        taskService.saveTask(taskForSave);
 
         return "redirect:/tasks";
     }
