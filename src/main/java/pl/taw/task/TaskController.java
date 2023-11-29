@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -37,22 +38,19 @@ public class TaskController {
 
         return "taskDetails";
     }
-//
-//    @PostMapping
-//    public Task addTask(@RequestBody Task task) {
-//        return taskService.saveTask(task);
-//    }
+
 
     @GetMapping("/new")
     public String showAddTaskForm(Model model) {
         Task newTask = new Task();
-        newTask.setCreatedTime(LocalDateTime.now());
         model.addAttribute("newTask", newTask);
         return "add-task";
     }
 
     @PostMapping
     public String addTask(@ModelAttribute("newTask") Task newTask) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm");
+        String format = LocalDateTime.now().format(formatter);
         Task taskForSave = Task.builder()
                 .taskId(newTask.getTaskId())
                 .taskType(newTask.getTaskType())

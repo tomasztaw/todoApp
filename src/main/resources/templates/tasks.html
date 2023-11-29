@@ -9,6 +9,12 @@
 </head>
 <body>
 
+<div>
+    <a th:href="@{'/tasks/new'}"><button>Dodaj zadanie</button></a>
+    <button onclick="goBack()">Powrót</button>
+    <a th:href="@{'/'}"><button>Powrót do strony głównej</button></a>
+</div>
+
 <h2>Lista Zadań</h2>
 
 <table>
@@ -36,6 +42,12 @@
     </tr>
     </tbody>
 </table>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 </body>
 </html>

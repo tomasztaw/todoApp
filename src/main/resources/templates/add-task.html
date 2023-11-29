@@ -8,6 +8,12 @@
 </head>
 <body>
 
+
+<div>
+    <button onclick="goBack()">Powrót</button>
+    <a th:href="@{'/'}"><button>Powrót do strony głównej</button></a>
+</div>
+
 <h2>Dodaj Zadanie</h2>
 
 <form th:action="@{/tasks}" method="post" th:object="${newTask}">
@@ -23,10 +29,14 @@
     <label for="completed">Zakończone:</label>
     <input type="checkbox" id="completed" name="completed" th:field="*{completed}"><br>
 
-<!--    <input type="hidden" id="creationDate" name="creationDate" th:value="${#dates.format(#dates.now(), 'yyyy-MM-dd')}">-->
-
     <button type="submit">Dodaj Zadanie</button>
 </form>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 </body>
 </html>
