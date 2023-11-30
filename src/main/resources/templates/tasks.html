@@ -34,7 +34,10 @@
         <td th:text="${task.taskType}"></td>
         <td th:text="${task.taskTitle}"></td>
         <td th:text="${task.taskContent}"></td>
-        <td th:text="${task.createdTime}"></td>
+
+<!--        <td th:text="${task.createdTime}"></td>-->
+        <td th:text="${#temporals.format(task.createdTime, 'yyyy MM dd HH:mm')}"></td>
+
         <td th:text="${task.completed}"></td>
         <td>
             <a th:href="@{'/tasks/' + ${task.taskId}}">Pokaż szczegóły</a>
