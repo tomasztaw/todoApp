@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -33,12 +32,11 @@ public class TaskController {
 
     @GetMapping("/{taskId}")
     public String showTaskById(@PathVariable("taskId") Integer id, Model model) {
-        Task task = taskService.getTaskById(id);
+        Task task = taskService.findTaskById(id);
         model.addAttribute("task", task);
 
         return "taskDetails";
     }
-
 
     @GetMapping("/new")
     public String showAddTaskForm(Model model) {
@@ -49,8 +47,6 @@ public class TaskController {
 
     @PostMapping
     public String addTask(@ModelAttribute("newTask") Task newTask) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm");
-        String format = LocalDateTime.now().format(formatter);
         Task taskForSave = Task.builder()
                 .taskId(newTask.getTaskId())
                 .taskType(newTask.getTaskType())
@@ -62,4 +58,33 @@ public class TaskController {
 
         return "redirect:/tasks";
     }
+
+    @PutMapping("/complete/{taskId}")
+    public String completeTask(@PathVariable Integer taskId) {
+        Task task = taskService.findTaskById(taskId);
+        if (task != null) {
+//            taskService.changeToCompleted(task);
+            task.setCompleted(true);
+            taskService.saveTask(task);
+        }
+
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/complete/{taskId}")
+    public String completeTaskGet(@PathVariable Integer taskId) {
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/complete/{taskId}")
+    public String completeTaskPost(@PathVariable Integer taskId) {
+        Task task = taskService.findTaskById(taskId);
+        if (task != null) {
+            task.setCompleted(true);
+            taskService.saveTask(task);
+        }
+        return "redirect:/tasks";
+    }
+
+
 }

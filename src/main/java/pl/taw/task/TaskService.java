@@ -23,13 +23,18 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Task getTaskById(Integer id) {
+    public Task findTaskById(Integer id) {
         return taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("There is no task with id: %s".formatted(id)));
     }
 
 
-    public Task saveTask(Task task) {
-        return taskRepository.save(task);
+    public void saveTask(Task task) {
+        taskRepository.save(task);
+    }
+
+    public void changeToCompleted(Task task) {
+        task.setCompleted(true);
+        taskRepository.save(task);
     }
 }

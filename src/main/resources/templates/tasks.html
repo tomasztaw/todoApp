@@ -24,8 +24,8 @@
         <th>Typ</th>
         <th>Tytuł</th>
         <th>Treść</th>
-        <th>Czas Utworzenia</th>
-        <th>Zakończone</th>
+        <th>Utworzone</th>
+        <th>Wykonane</th>
     </tr>
     </thead>
     <tbody>
@@ -34,14 +34,21 @@
         <td th:text="${task.taskType}"></td>
         <td th:text="${task.taskTitle}"></td>
         <td th:text="${task.taskContent}"></td>
-
-<!--        <td th:text="${task.createdTime}"></td>-->
-        <td th:text="${#temporals.format(task.createdTime, 'yyyy MM dd HH:mm')}"></td>
-
+        <td th:text="${#temporals.format(task.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
         <td th:text="${task.completed}"></td>
         <td>
-            <a th:href="@{'/tasks/' + ${task.taskId}}">Pokaż szczegóły</a>
+            <a th:href="@{'/tasks/' + ${task.taskId}}">Pokaż</a>
         </td>
+<!--        <td>-->
+<!--            <a th:href="@{'/tasks/complete/' + ${task.taskId}}">Zrobione</a>-->
+<!--        </td>-->
+        <td>
+            <form th:action="@{'/tasks/complete/' + ${task.taskId}}" th:method="put">
+                <button type="submit">Zrobione</button>
+            </form>
+        </td>
+
+
     </tr>
     </tbody>
 </table>

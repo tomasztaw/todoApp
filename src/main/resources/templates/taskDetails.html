@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Szczegóły Zadania</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-
 </head>
 <body>
+
+<div>
+  <a th:href="@{'/tasks/new'}"><button>Dodaj zadanie</button></a>
+  <button onclick="goBack()">Powrót</button>
+  <a th:href="@{'/'}"><button>Powrót do strony głównej</button></a>
+</div>
 
 <h2>Szczegóły Zadania</h2>
 
@@ -19,8 +23,8 @@
     <th>Typ</th>
     <th>Tytuł</th>
     <th>Treść</th>
-    <th>Czas Utworzenia</th>
-    <th>Zakończone</th>
+    <th>Utworzone</th>
+    <th>Wykonane</th>
   </tr>
   </thead>
   <tbody>
@@ -29,8 +33,24 @@
     <td th:text="${task.taskType}"></td>
     <td th:text="${task.taskTitle}"></td>
     <td th:text="${task.taskContent}"></td>
-    <td th:text="${task.createdTime}"></td>
+    <td th:text="${#temporals.format(task.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
     <td th:text="${task.completed}"></td>
+<!--    <td>-->
+<!--      <a th:href="@{'/tasks/complete/' + ${task.taskId}}">Zrobione</a>-->
+<!--    </td>-->
+    <td>
+      <form th:action="@{'/tasks/complete/' + ${task.taskId}}" method="put">
+        <button type="submit">Zrobione</button>
+      </form>
+    </td>
+
+    <td>
+      <form th:action="@{'/tasks/complete/' + ${task.taskId}}" method="post">
+        <button type="submit">Oznacz jako wykonane</button>
+      </form>
+
+    </td>
+
   </tr>
   </tbody>
 </table>
