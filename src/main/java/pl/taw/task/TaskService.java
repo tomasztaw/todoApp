@@ -37,4 +37,9 @@ public class TaskService {
         task.setCompleted(true);
         taskRepository.save(task);
     }
+
+    public void deleteTask(Task task) {
+        taskRepository.delete(task);
+    }
+
 }

@@ -35,9 +35,6 @@
     <td th:text="${task.taskContent}"></td>
     <td th:text="${#temporals.format(task.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
     <td th:text="${task.completed}"></td>
-<!--    <td>-->
-<!--      <a th:href="@{'/tasks/complete/' + ${task.taskId}}">Zrobione</a>-->
-<!--    </td>-->
     <td>
       <form th:action="@{'/tasks/complete/' + ${task.taskId}}" method="put">
         <button type="submit">Zrobione</button>

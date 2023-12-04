@@ -63,7 +63,6 @@ public class TaskController {
     public String completeTask(@PathVariable Integer taskId) {
         Task task = taskService.findTaskById(taskId);
         if (task != null) {
-//            taskService.changeToCompleted(task);
             task.setCompleted(true);
             taskService.saveTask(task);
         }
@@ -86,5 +85,14 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-
+    @DeleteMapping("/delete/{taskId}")
+    public String deleteTaskById(@PathVariable Integer taskId) {
+        Task task = taskService.findTaskById(taskId);
+        if (task != null) {
+            taskService.deleteTask(task);
+        } else {
+            throw new RuntimeException("There is no task with id: " + taskId);
+        }
+        return "redirect:/tasks";
+    }
 }

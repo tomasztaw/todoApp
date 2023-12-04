@@ -6,6 +6,21 @@
     <title>Lista Zadań</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 
+    <style>
+        .styled-button {
+            background-color: transparent;
+            border: none;
+            color: green;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -39,14 +54,18 @@
         <td>
             <a th:href="@{'/tasks/' + ${task.taskId}}">Pokaż</a>
         </td>
-<!--        <td>-->
-<!--            <a th:href="@{'/tasks/complete/' + ${task.taskId}}">Zrobione</a>-->
-<!--        </td>-->
         <td>
             <form th:action="@{'/tasks/complete/' + ${task.taskId}}" th:method="put">
-                <button type="submit">Zrobione</button>
+                <button class="styled-button" type="submit">Zrobione</button>
             </form>
         </td>
+        <td>
+            <form th:action="@{'/tasks/delete/' + ${task.taskId}}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button class="styled-button" type="submit">Usuń</button>
+            </form>
+        </td>
+
 
 
     </tr>
