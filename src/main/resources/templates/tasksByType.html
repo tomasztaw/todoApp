@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Zadań Według Typu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+
+    <style>
+        .styled-button {
+            background-color: transparent;
+            border: none;
+            color: green;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+
+</head>
+<body>
+
+<div>
+    <a th:href="@{'/tasks/new'}"><button>Dodaj zadanie</button></a>
+    <button onclick="goBack()">Powrót</button>
+    <a th:href="@{'/'}"><button>Powrót do strony głównej</button></a>
+</div>
+
+<h2>Lista Zadań Według Typu</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Typ</th>
+        <th>Tytuł</th>
+        <th>Treść</th>
+        <th>Utworzone</th>
+        <th>Wykonane</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.taskId}"></td>
+        <td th:text="${task.taskType}"></td>
+        <td th:text="${task.taskTitle}"></td>
+        <td th:text="${task.taskContent}"></td>
+        <td th:text="${#temporals.format(task.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${task.completed}"></td>
+        <td>
+            <a th:href="@{'/tasks/' + ${task.taskId}}">Pokaż</a>
+        </td>
+        <td>
+            <form th:action="@{'/tasks/complete/' + ${task.taskId}}" th:method="put">
+                <button class="styled-button" type="submit">Zrobione</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/tasks/delete/' + ${task.taskId}}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button class="styled-button" type="submit">Usuń</button>
+            </form>
+        </td>
+
+
+
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>

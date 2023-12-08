@@ -42,4 +42,14 @@ public class TaskService {
         taskRepository.delete(task);
     }
 
+    public List<String> listOfTaskTypes() {
+
+        return taskRepository.listOfTaskTypes();
+    }
+
+    public List<Task> findTasksByType(String taskType) {
+        return taskRepository.findAll().stream()
+                .filter(task -> taskType.equals(task.getTaskType()))
+                .toList();
+    }
 }

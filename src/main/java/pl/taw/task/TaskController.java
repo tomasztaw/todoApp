@@ -38,6 +38,15 @@ public class TaskController {
         return "taskDetails";
     }
 
+    @GetMapping("/{taskType}")
+    public String tasksByType(@PathVariable("taskType") String taskType, Model model) {
+        List<Task> tasks = taskService.findTasksByType(taskType);
+
+        model.addAttribute("tasks", tasks);
+
+        return "tasksByType";
+    }
+
     @GetMapping("/new")
     public String showAddTaskForm(Model model) {
         Task newTask = new Task();

@@ -8,6 +8,11 @@
 <!--    <script src="jquery-2.1.4.js"></script>-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <style>
+        .task_types {
+            min-height: 300px;
+        }
+    </style>
 
 </head>
 <body>
@@ -31,6 +36,12 @@
         Wyświetl wszystkie zadania
     </a>
 
+    <p>Lub wyświetl zadania według typu</p>
+    <div class="task_types">
+        <div th:each="taskType : ${taskTypes}">
+            <a th:href="@{/tasks/{type}(type=${taskType})}" th:text="${taskType}"></a>
+        </div>
+    </div>
 
     <a href="https://wordgenerator-production.up.railway.app/swagger-ui.html" title="swagger" target="_blank">
         Swagger
