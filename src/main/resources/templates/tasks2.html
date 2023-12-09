@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .content-column {
+            max-width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Task List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Typ</th>
+        <th>Tytuł</th>
+        <th>Utworzone</th>
+        <th>Wykonane</th>
+        <th>Treść</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.taskId}"></td>
+        <td th:text="${task.taskType}"></td>
+        <td th:text="${task.taskTitle}"></td>
+        <td th:text="${#temporals.format(task.createdTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${task.completed}"></td>
+        <td class="content-column" th:text="${task.taskContent}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

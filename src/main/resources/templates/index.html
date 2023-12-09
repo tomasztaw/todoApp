@@ -12,6 +12,10 @@
         .task_types {
             min-height: 300px;
         }
+
+        .task_type {
+            margin: 30px;
+        }
     </style>
 
 </head>
@@ -38,8 +42,8 @@
 
     <p>Lub wyświetl zadania według typu</p>
     <div class="task_types">
-        <div th:each="taskType : ${taskTypes}">
-            <a th:href="@{/tasks/{type}(type=${taskType})}" th:text="${taskType}"></a>
+        <div class="task_type" th:each="taskType : ${taskTypes}">
+            <a th:href="@{/tasks/type/{taskType}(taskType=${taskType})}" th:text="${taskType}"></a>
         </div>
     </div>
 

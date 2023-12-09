@@ -30,6 +30,14 @@ public class TaskController {
         return "tasks";
     }
 
+    @GetMapping("/all2")
+    public String showTasks2(Model model) {
+        List<Task> tasks = taskService.getAllTasks();
+        model.addAttribute("tasks", tasks);
+
+        return "tasks2";
+    }
+
     @GetMapping("/{taskId}")
     public String showTaskById(@PathVariable("taskId") Integer id, Model model) {
         Task task = taskService.findTaskById(id);
@@ -38,7 +46,7 @@ public class TaskController {
         return "taskDetails";
     }
 
-    @GetMapping("/{taskType}")
+    @GetMapping("/type/{taskType}")
     public String tasksByType(@PathVariable("taskType") String taskType, Model model) {
         List<Task> tasks = taskService.findTasksByType(taskType);
 
